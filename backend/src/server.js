@@ -13,6 +13,11 @@ connectDB();// connects te database using the connectDB function from db.js
             
 app.use(express.json());//middleware will parse the json bodies
 
+app.use((req,res,next)=>{
+  console.log(`Method used ${req.method} and the URL is ${req.url}`);
+  next();
+})
+
 app.use("/api/notes", noteRoutes);
 
 // A method used to listen incomming requests on ports 5000.
