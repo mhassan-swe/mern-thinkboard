@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5001;
 
 connectDB();// connects te database using the connectDB function from db.js
             
-app.use(express.json());//middleware
+app.use(express.json());//middleware will parse the json bodies
 
 app.use("/api/notes", noteRoutes);
 
