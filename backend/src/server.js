@@ -10,7 +10,7 @@ dotenv.config();// use to get the enviorment variable from .env file and add the
 const app = express();// Create a server called "app" using Express
 const PORT = process.env.PORT || 5001; 
 
-connectDB();// connects te database using the connectDB function from db.js
+// connects te database using the connectDB function from db.js
             
 app.use(express.json());//middleware will parse the json bodies
 app.use(rateLimiter)
@@ -22,10 +22,16 @@ app.use((req,res,next)=>{
 
 app.use("/api/notes", noteRoutes);
 
-// A method used to listen incomming requests on ports 5000.
+
+
+connectDB().then(()=>{
+  // A method used to listen incomming requests on ports 5000.
 app.listen(PORT,()=>{  
     console.log("Server is running on port:",PORT);
 });     
+});
+
+
 
     
 /*
