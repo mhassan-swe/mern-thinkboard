@@ -1,8 +1,9 @@
 // Import Express toolbox to create a web server
 import express from "express";
 import noteRoutes from "./routes/noteRoutes.js";
-import connectDB from"../config/db.js";
+import connectDB from"./config/db.js";
 import dotenv from "dotenv";
+import rateLimiter from "./middleware/rateLimitter.js";
 
 dotenv.config();// use to get the enviorment variable from .env file and add them into process.env
 
@@ -12,6 +13,7 @@ const PORT = process.env.PORT || 5001;
 connectDB();// connects te database using the connectDB function from db.js
             
 app.use(express.json());//middleware will parse the json bodies
+app.use(rateLimiter)
 
 app.use((req,res,next)=>{
   console.log(`Method used ${req.method} and the URL is ${req.url}`);
